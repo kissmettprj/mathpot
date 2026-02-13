@@ -1,12 +1,13 @@
 <script setup>
 import { ref, nextTick, watch } from 'vue'
+import { marked } from 'marked'
 import { streamAI, buildContextPrompt } from '../services/ai'
 
 const props = defineProps({
   node: Object,
   mode: {
     type: String,
-    default: 'knowledge' // knowledge, homework, suggestion
+    default: 'knowledge'
   }
 })
 
@@ -18,16 +19,10 @@ const isLoading = ref(false)
 const messagesContainer = ref(null)
 const streamingContent = ref('')
 
-const modeLabels = {
-  knowledge: '知识点问答',
-  homework: '题目解析',
-  suggestion: '学习建议'
-}
-
 const modePlaceholders = {
-  knowledge: '有什么不懂的知识点可以问我...',
-  homework: '把题目发给我，我来帮你分析...',
-  suggestion: '我想了解一下学习建议...'
+  knowledge: '有什么不懂的可以问我...',
+  homework: '把题目发给我分析...',
+  suggestion: '想要学习建议...'
 }
 
 const scrollToBottom = () => {
@@ -38,8 +33,19 @@ const scrollToBottom = () => {
   })
 }
 
-const formatContent = (content) => {
-  return content.replace(/\n/g, '<br>')
+const renderMarkdown = (content) => {
+  return marked(content, { breaks: true })
+}
+
+const suggestedQuestions = [
+  { label: '该知识点的重点是什么？', prompt: '请总结这个知识点的重点和难点' },
+  { label: '我该如何学习？', prompt: '请给我一些学习这个知识点的建议和方法' },
+  { label: '出几道题试试', prompt: '请出3-5道关于这个知识点的练习题，并给出答案' }
+]
+
+const askQuestion = (question) => {
+  input.value = question.prompt
+  sendMessage()
 }
 
 const sendMessage = async () => {
@@ -79,10 +85,6 @@ const sendMessage = async () => {
   }
 }
 
-const clearChat = () => {
-  messages.value = []
-}
-
 watch(() => props.node, () => {
   messages.value = []
 })
@@ -90,23 +92,27 @@ watch(() => props.node, () => {
 
 <template>
   <div class="ai-chat">
-    <div class="chat-header">
-      <span class="chat-title">AI 助手</span>
-      <span class="chat-mode">{{ modeLabels[mode] }}</span>
-      <button class="clear-btn" @click="clearChat" v-if="messages.length">清空对话</button>
-    </div>
-
     <div class="chat-messages" ref="messagesContainer">
-      <div v-if="messages.length === 0" class="welcome-message">
-        <div class="welcome-icon">🤖</div>
-        <div class="welcome-text">
-          <p>你好！我是数学AI助手</p>
-          <p>我可以帮你：</p>
-          <ul>
-            <li>📖 解答知识点疑问</li>
-            <li>📝 分析数学题目</li>
-            <li>💡 提供学习建议</li>
-          </ul>
+      <div v-if="messages.length === 0" class="welcome-section">
+        <div class="welcome-message">
+          <div class="welcome-icon">🤖</div>
+          <div class="welcome-text">
+            <p>我是数学AI助手，有什么问题都可以问我</p>
+          </div>
+        </div>
+        
+        <div class="suggested-questions">
+          <p class="suggested-title">试试这样问：</p>
+          <div class="suggested-list">
+            <button 
+              v-for="(q, i) in suggestedQuestions" 
+              :key="i"
+              class="suggested-btn"
+              @click="askQuestion(q)"
+            >
+              {{ q.label }}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -120,7 +126,7 @@ watch(() => props.node, () => {
           {{ msg.role === 'user' ? '👤' : '🤖' }}
         </div>
         <div class="message-content">
-          <span v-html="formatContent(msg.content)"></span>
+          <span v-html="renderMarkdown(msg.content)"></span>
           <span v-if="isLoading && index === messages.length - 1" class="cursor">▌</span>
         </div>
       </div>
@@ -151,42 +157,6 @@ watch(() => props.node, () => {
   overflow: hidden;
 }
 
-.chat-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-}
-
-.chat-title {
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.chat-mode {
-  font-size: 12px;
-  background: rgba(255,255,255,0.2);
-  padding: 2px 8px;
-  border-radius: 10px;
-}
-
-.clear-btn {
-  margin-left: auto;
-  background: rgba(255,255,255,0.2);
-  border: none;
-  color: white;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.clear-btn:hover {
-  background: rgba(255,255,255,0.3);
-}
-
 .chat-messages {
   flex: 1;
   overflow-y: auto;
@@ -200,7 +170,7 @@ watch(() => props.node, () => {
   padding: 16px;
   background: white;
   border-radius: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .welcome-icon {
@@ -216,13 +186,43 @@ watch(() => props.node, () => {
   margin-bottom: 8px;
 }
 
-.welcome-text ul {
-  list-style: none;
-  padding: 0;
+.welcome-section {
+  padding-bottom: 8px;
 }
 
-.welcome-text li {
-  margin-bottom: 4px;
+.suggested-questions {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.suggested-title {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.suggested-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.suggested-btn {
+  padding: 8px 12px;
+  background: #f0f5ff;
+  border: 1px solid #d0dfff;
+  border-radius: 16px;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.suggested-btn:hover {
+  background: #e0ebff;
+  border-color: #667eea;
+  color: #667eea;
 }
 
 .message {
@@ -246,7 +246,47 @@ watch(() => props.node, () => {
   border-radius: 12px;
   font-size: 14px;
   line-height: 1.6;
-  white-space: pre-wrap;
+}
+
+.message-content :deep(p) {
+  margin: 0 0 8px 0;
+}
+
+.message-content :deep(p:last-child) {
+  margin-bottom: 0;
+}
+
+.message-content :deep(ul), .message-content :deep(ol) {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.message-content :deep(li) {
+  margin: 4px 0;
+}
+
+.message-content :deep(code) {
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.message-content :deep(pre) {
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 8px 0;
+}
+
+.message-content :deep(strong) {
+  font-weight: 600;
+}
+
+.message-content :deep(h1), .message-content :deep(h2), .message-content :deep(h3) {
+  margin: 12px 0 8px 0;
+  font-weight: 600;
 }
 
 .message.user .message-content {
@@ -260,31 +300,14 @@ watch(() => props.node, () => {
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.message.loading .message-content {
-  display: flex;
-  gap: 4px;
-}
-
-.message.loading .dot {
-  animation: blink 1.4s infinite;
-}
-
-.message.loading .dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.message.loading .dot:nth-child(3) {
-  animation-delay: 0.4s;
+.cursor {
+  animation: blink 1s infinite;
+  color: #667eea;
 }
 
 @keyframes blink {
   0%, 60%, 100% { opacity: 0; }
   30% { opacity: 1; }
-}
-
-.cursor {
-  animation: blink 1s infinite;
-  color: #667eea;
 }
 
 .chat-input {

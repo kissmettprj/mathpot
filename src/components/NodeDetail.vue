@@ -87,7 +87,7 @@ watch(() => props.node, async (newNode) => {
 <template>
   <aside class="side-panel open">
     <div class="panel-header">
-      <h2>知识点详情</h2>
+      <h2>{{ node?.name }}</h2>
       <button class="close-btn" @click="emit('close')">&times;</button>
     </div>
     
@@ -101,7 +101,7 @@ watch(() => props.node, async (newNode) => {
         class="tab-btn" 
         :class="{ active: activeTab === 'ai' }"
         @click="activeTab = 'ai'"
-      >🤖 AI 助手</button>
+      >AI 问答</button>
     </div>
 
     <div class="panel-content" v-if="node && activeTab === 'content'">
@@ -214,23 +214,6 @@ watch(() => props.node, async (newNode) => {
     </div>
 
     <div class="ai-section" v-if="node && activeTab === 'ai'">
-      <div class="ai-mode-select">
-        <button 
-          class="mode-btn" 
-          :class="{ active: aiMode === 'knowledge' }"
-          @click="aiMode = 'knowledge'"
-        >📖 问答</button>
-        <button 
-          class="mode-btn" 
-          :class="{ active: aiMode === 'homework' }"
-          @click="aiMode = 'homework'"
-        >📝 题目</button>
-        <button 
-          class="mode-btn" 
-          :class="{ active: aiMode === 'suggestion' }"
-          @click="aiMode = 'suggestion'"
-        >💡 建议</button>
-      </div>
       <AIChat :node="node" :mode="aiMode" />
     </div>
   </aside>
@@ -279,35 +262,6 @@ watch(() => props.node, async (newNode) => {
   display: flex;
   flex-direction: column;
   height: calc(100% - 52px);
-}
-
-.ai-mode-select {
-  display: flex;
-  gap: 8px;
-  padding: 12px;
-  background: white;
-  border-bottom: 1px solid #eee;
-}
-
-.mode-btn {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ddd;
-  background: white;
-  font-size: 13px;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: all 0.2s;
-}
-
-.mode-btn:hover {
-  border-color: #667eea;
-}
-
-.mode-btn.active {
-  background: #667eea;
-  color: white;
-  border-color: #667eea;
 }
 
 .knowledge-description {
