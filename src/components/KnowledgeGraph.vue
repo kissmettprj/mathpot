@@ -93,7 +93,7 @@ const initGraph = () => {
   const g = svg.append('g')
 
   const zoom = d3.zoom()
-    .scaleExtent([0.3, 3])
+    .scaleExtent([0.5, 3])
     .on('zoom', (event) => {
       g.attr('transform', event.transform)
     })
@@ -104,10 +104,10 @@ const initGraph = () => {
   const links = filteredLinks.value.map(l => ({ ...l }))
 
   simulation.value = d3.forceSimulation(nodes)
-    .force('link', d3.forceLink(links).id(d => d.id).distance(150))
-    .force('charge', d3.forceManyBody().strength(-400))
+    .force('link', d3.forceLink(links).id(d => d.id).distance(50))
+    .force('charge', d3.forceManyBody().strength(-80))
     .force('center', d3.forceCenter(width.value / 2, height.value / 2))
-    .force('collision', d3.forceCollide().radius(50))
+    .force('collision', d3.forceCollide().radius(45))
 
   const link = g.append('g')
     .selectAll('line')
@@ -131,19 +131,20 @@ const initGraph = () => {
     })
 
   node.append('circle')
-    .attr('r', d => 14 + (d.importance || 1) * 3)
+    .attr('r', d => 20 + (d.importance || 1) * 4)
     .attr('fill', d => {
       const isCompleted = progressStore.isCompleted(d.id)
       return isCompleted ? 'white' : levelColors[d.level] || '#999'
     })
     .attr('stroke', d => levelColors[d.level] || '#999')
-    .attr('stroke-width', 2.5)
+    .attr('stroke-width', 3)
 
   node.append('text')
-    .attr('dy', d => 20 + (d.importance || 1) * 3)
+    .attr('dy', d => 28 + (d.importance || 1) * 4)
     .attr('text-anchor', 'middle')
     .attr('fill', '#333')
-    .attr('font-size', '13px')
+    .attr('font-size', '16px')
+    .attr('font-weight', '500')
     .text(d => d.name.length > 8 ? d.name.substring(0, 8) + '...' : d.name)
 
   simulation.value.on('tick', () => {
