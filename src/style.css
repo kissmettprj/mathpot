@@ -5,6 +5,7 @@
 }
 
 :root {
+  --primary-primary: #F5A623;
   --primary-junior: #4A90D9;
   --primary-senior: #52C41A;
   --highlight: #FA8C16;
@@ -363,6 +364,7 @@ input:focus, select:focus {
   border-radius: 50%;
 }
 
+.legend-dot.primary { background: #F5A623; }
 .legend-dot.junior { background: var(--primary-junior); }
 .legend-dot.senior { background: var(--primary-senior); }
 .legend-dot.completed {

@@ -22,6 +22,7 @@ const width = ref(800)
 const height = ref(600)
 
 const levelColors = {
+  primary: '#F5A623',
   junior: '#4A90D9',
   senior: '#52C41A'
 }
@@ -234,6 +235,10 @@ onUnmounted(() => {
     <svg ref="svgRef" id="knowledge-graph"></svg>
     
     <div class="legend">
+      <div class="legend-item">
+        <span class="legend-dot primary"></span>
+        <span>小学知识点</span>
+      </div>
       <div class="legend-item">
         <span class="legend-dot junior"></span>
         <span>初中知识点</span>

@@ -14,7 +14,8 @@ const showAnswers = ref({})
 const isCompleted = ref(false)
 
 const levelText = computed(() => {
-  return props.node?.level === 'junior' ? '初中' : '高中'
+  const map = { junior: '初中', senior: '高中', primary: '小学' }
+  return map[props.node?.level] || ''
 })
 
 const categoryText = computed(() => {

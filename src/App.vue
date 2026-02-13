@@ -42,6 +42,7 @@ const progressPercent = computed(() => {
 
 const groupedNodes = computed(() => {
   const groups = {
+    primary: { algebra: [], geometry: [], statistics: [] },
     junior: { algebra: [], geometry: [], functions: [], statistics: [] },
     senior: { algebra: [], geometry: [], functions: [], sequences: [], statistics: [], calculus: [] }
   }
@@ -97,6 +98,11 @@ onMounted(() => {
         >全部</button>
         <button 
           class="filter-btn" 
+          :class="{ active: filterLevel === 'primary' }"
+          @click="handleFilterLevel('primary')"
+        >小学</button>
+        <button 
+          class="filter-btn" 
           :class="{ active: filterLevel === 'junior' }"
           @click="handleFilterLevel('junior')"
         >初中</button>
@@ -131,6 +137,29 @@ onMounted(() => {
 
     <div class="knowledge-list-panel" v-show="showList">
       <div class="list-section">
+        <div class="list-group">
+          <h3 class="group-title primary">小学知识点</h3>
+          <div v-for="(nodes, category) in groupedNodes.primary" :key="category" class="category-block">
+            <template v-if="nodes.length">
+              <div class="category-header">
+                <span class="category-name">{{ {algebra: '代数', geometry: '几何', statistics: '统计概率'}[category] }}</span>
+                <span class="category-count">{{ nodes.length }}</span>
+              </div>
+              <div class="category-items expanded">
+                <span 
+                  v-for="node in nodes" 
+                  :key="node.id"
+                  class="knowledge-item"
+                  :class="{ completed: progressStore.isCompleted(node.id) }"
+                  @click="handleNodeSelect(node)"
+                >
+                  {{ node.name }}
+                </span>
+              </div>
+            </template>
+          </div>
+        </div>
+
         <div class="list-group">
           <h3 class="group-title junior">初中知识点</h3>
           <div v-for="(nodes, category) in groupedNodes.junior" :key="category" class="category-block">
