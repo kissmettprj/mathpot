@@ -121,6 +121,18 @@ input:focus, select:focus {
   color: var(--text-secondary);
 }
 
+.footer-link {
+  margin-left: 12px;
+  font-size: 16px;
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity 0.2s;
+}
+
+.footer-link:hover {
+  opacity: 1;
+}
+
 .main-content {
   display: flex;
   flex: 1;
@@ -391,23 +403,69 @@ input:focus, select:focus {
 
 @media (max-width: 768px) {
   .toolbar {
-    padding: 10px 12px;
-    gap: 10px;
-  }
-  
-  .search-box {
-    order: 1;
-    flex-basis: 100%;
-    max-width: none;
+    padding: 8px 10px;
+    gap: 6px;
+    flex-wrap: wrap;
   }
   
   .filter-group {
+    order: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    flex: 0 0 auto;
+  }
+  
+  .filter-btn {
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+  
+  .list-toggle-btn {
     order: 2;
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+  
+  .search-box {
+    order: 3;
+    flex: 0 0 45%;
+    min-width: 100px;
+    max-width: none;
+  }
+  
+  .search-box input {
+    width: 100%;
+    padding: 6px 8px 6px 26px;
+    font-size: 12px;
+  }
+  
+  .search-box::before {
+    left: 6px;
+    font-size: 11px;
+  }
+  
+  .category-select {
+    order: 4;
+    padding: 4px 6px;
+    font-size: 10px;
   }
   
   .progress-info {
-    order: 3;
-    margin-left: 0;
+    order: 5;
+    margin-left: auto;
+    font-size: 10px;
+    gap: 4px;
+  }
+  
+  .progress-percent {
+    font-size: 11px;
+  }
+  
+  .footer-link {
+    order: 6;
+    margin-left: 4px;
+    font-size: 12px;
   }
   
   .side-panel {

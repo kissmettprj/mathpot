@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import KnowledgeGraph from './components/KnowledgeGraph.vue'
 import NodeDetail from './components/NodeDetail.vue'
 import { useProgressStore } from './stores/progress'
@@ -75,7 +75,19 @@ const loadKnowledgeData = async () => {
 onMounted(() => {
   progressStore.loadProgress()
   loadKnowledgeData()
+  
+  document.addEventListener('keydown', handleKeydown)
 })
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleKeydown)
+})
+
+const handleKeydown = (e) => {
+  if (e.key === 'Escape' && selectedNode.value) {
+    handleClosePanel()
+  }
+}
 </script>
 
 <template>
@@ -133,6 +145,8 @@ onMounted(() => {
         <span>学习进度</span>
         <span class="progress-percent">{{ progressPercent }}%</span>
       </div>
+      
+      <a href="https://www.kekeda.com.cn/" target="_blank" class="footer-link" title="颗颗搭">🎓</a>
     </header>
 
     <div class="knowledge-list-panel" v-show="showList">

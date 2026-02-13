@@ -1,7 +1,13 @@
 <script setup>
 import { ref, nextTick, watch } from 'vue'
 import { marked } from 'marked'
+import markedKatex from 'marked-katex-extension'
+import 'katex/dist/katex.min.css'
 import { streamAI, buildContextPrompt } from '../services/ai'
+
+marked.use(markedKatex({
+  throwOnError: false
+}))
 
 const props = defineProps({
   node: Object,
