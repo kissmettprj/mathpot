@@ -133,6 +133,11 @@ input:focus, select:focus {
   opacity: 1;
 }
 
+.knowledge-list-panel {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
 .main-content {
   display: flex;
   flex: 1;
@@ -466,6 +471,10 @@ input:focus, select:focus {
     order: 6;
     margin-left: 4px;
     font-size: 12px;
+  }
+  
+  .knowledge-list-panel {
+    max-height: 50vh;
   }
   
   .side-panel {
