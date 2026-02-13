@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useProgressStore } from '../stores/progress'
+import AIChat from './AIChat.vue'
 
 const props = defineProps({
   node: Object
@@ -12,6 +13,8 @@ const progressStore = useProgressStore()
 const questions = ref([])
 const showAnswers = ref({})
 const isCompleted = ref(false)
+const activeTab = ref('content')
+const aiMode = ref('knowledge')
 
 const levelText = computed(() => {
   const map = { junior: '初中', senior: '高中', primary: '小学' }
@@ -88,7 +91,20 @@ watch(() => props.node, async (newNode) => {
       <button class="close-btn" @click="emit('close')">&times;</button>
     </div>
     
-    <div class="panel-content" v-if="node">
+    <div class="tab-nav" v-if="node">
+      <button 
+        class="tab-btn" 
+        :class="{ active: activeTab === 'content' }"
+        @click="activeTab = 'content'"
+      >内容</button>
+      <button 
+        class="tab-btn" 
+        :class="{ active: activeTab === 'ai' }"
+        @click="activeTab = 'ai'"
+      >🤖 AI 助手</button>
+    </div>
+
+    <div class="panel-content" v-if="node && activeTab === 'content'">
       <div class="knowledge-meta">
         <span class="knowledge-tag" :class="node.level">
           {{ levelText }}
@@ -196,6 +212,27 @@ watch(() => props.node, async (newNode) => {
         <p style="color: var(--text-light); font-size: 14px;">暂无相关题目</p>
       </div>
     </div>
+
+    <div class="ai-section" v-if="node && activeTab === 'ai'">
+      <div class="ai-mode-select">
+        <button 
+          class="mode-btn" 
+          :class="{ active: aiMode === 'knowledge' }"
+          @click="aiMode = 'knowledge'"
+        >📖 问答</button>
+        <button 
+          class="mode-btn" 
+          :class="{ active: aiMode === 'homework' }"
+          @click="aiMode = 'homework'"
+        >📝 题目</button>
+        <button 
+          class="mode-btn" 
+          :class="{ active: aiMode === 'suggestion' }"
+          @click="aiMode = 'suggestion'"
+        >💡 建议</button>
+      </div>
+      <AIChat :node="node" :mode="aiMode" />
+    </div>
   </aside>
 </template>
 
@@ -208,6 +245,69 @@ watch(() => props.node, async (newNode) => {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 16px;
+}
+
+.tab-nav {
+  display: flex;
+  background: #f5f7fa;
+  padding: 8px;
+  gap: 8px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  background: #e8e8e8;
+}
+
+.tab-btn.active {
+  background: white;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.ai-section {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 52px);
+}
+
+.ai-mode-select {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.mode-btn:hover {
+  border-color: #667eea;
+}
+
+.mode-btn.active {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
 }
 
 .knowledge-description {
