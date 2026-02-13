@@ -6,7 +6,7 @@ const props = defineProps({
   node: Object
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close', 'selectNode'])
 
 const progressStore = useProgressStore()
 const questions = ref([])
@@ -113,7 +113,7 @@ watch(() => props.node, async (newNode) => {
             v-for="topic in relatedTopics.prerequisites" 
             :key="topic.id"
             class="topic-item"
-            @click="emit('close')"
+            @click="emit('selectNode', topic)"
           >
             {{ topic.name }}
           </span>
@@ -127,7 +127,7 @@ watch(() => props.node, async (newNode) => {
             v-for="topic in relatedTopics.next" 
             :key="topic.id"
             class="topic-item"
-            @click="emit('close')"
+            @click="emit('selectNode', topic)"
           >
             {{ topic.name }}
           </span>

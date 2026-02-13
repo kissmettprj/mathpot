@@ -194,6 +194,7 @@ onMounted(() => {
         v-if="selectedNode"
         :node="selectedNode"
         @close="handleClosePanel"
+        @select-node="handleNodeSelect"
         :class="{ open: isPanelOpen }"
       />
 
