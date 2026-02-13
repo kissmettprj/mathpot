@@ -8,7 +8,7 @@
       "importance": 3,
       "description": "整数和分数的统称，是初中数学的基础概念",
       "content": "【定义】\n有理数是整数和分数的统称，即可以表示为两个整数之比的数。\n\n【分类】\n• 正整数：1, 2, 3, ...\n• 零：0\n• 负整数：-1, -2, -3, ...\n• 正分数：1/2, 3/4, ...\n• 负分数：-1/2, -3/4, ...\n\n【性质】\n1. 有理数都可以表示为 p/q 的形式（p、q为整数，q≠0）\n2. 有理数都可以表示为有限小数或无限循环小数\n3. 有理数集对四则运算封闭（除数不为零）\n\n【数轴表示】\n所有有理数都可以用数轴上的点来表示，但数轴上的点不都是有理数。",
-      "prerequisites": [],
+      "prerequisites": ["integer", "decimal", "fraction"],
       "nextTopics": ["real-number", "algebraic-expression"]
     },
     {
@@ -30,7 +30,7 @@
       "importance": 3,
       "description": "用运算符号把数和字母连接而成的式子",
       "content": "【定义】\n用运算符号（加、减、乘、除、乘方、开方）把数和字母连接而成的式子叫做代数式。\n\n【分类】\n• 整式：单项式和多项式\n  - 单项式：如 3x², -2xy\n  - 多项式：如 x² + 2x + 1\n• 分式：分母中含有字母的代数式，如 1/x, x/(x+1)\n\n【代数式的值】\n用数值代替代数式中的字母，按照代数式中的运算顺序计算出的结果。\n\n【注意事项】\n1. 单独一个数或字母也是代数式\n2. 代数式不含等号或不等号\n3. 求值时注意字母的取值范围",
-      "prerequisites": ["rational-number"],
+      "prerequisites": ["arithmetic-operation"],
       "nextTopics": ["polynomial", "fraction"]
     },
     {
@@ -41,7 +41,7 @@
       "importance": 3,
       "description": "多项式的概念及整式的加减乘除运算",
       "content": "【多项式】\n几个单项式的和叫做多项式。多项式中每个单项式叫做多项式的项，不含字母的项叫做常数项。\n\n【整式加减】\n1. 去括号：a+(b+c)=a+b+c, a-(b+c)=a-b-c\n2. 合并同类项：字母和字母指数相同的项可以合并\n\n【整式乘法】\n• 单项式×单项式：系数相乘，同底数幂相乘\n• 单项式×多项式：m(a+b+c)=ma+mb+mc\n• 多项式×多项式：(a+b)(c+d)=ac+ad+bc+bd\n\n【乘法公式】\n1. 平方差公式：(a+b)(a-b)=a²-b²\n2. 完全平方公式：(a±b)²=a²±2ab+b²\n\n【整式除法】\n• 单项式÷单项式：系数相除，同底数幂相除\n• 多项式÷单项式：(a+b)÷m=a/m+b/m",
-      "prerequisites": ["algebraic-expression"],
+      "prerequisites": ["operation-law"],
       "nextTopics": ["factorization"]
     },
     {
@@ -63,7 +63,7 @@
       "importance": 3,
       "description": "含有一个未知数且未知数的次数为1的方程",
       "content": "【定义】\n只含有一个未知数，未知数的次数都是1，等号两边都是整式的方程叫做一元一次方程。\n\n【标准形式】\nax + b = 0（a≠0）\n\n【解法步骤】\n1. 去分母：方程两边同乘各分母的最小公倍数\n2. 去括号：注意符号变化\n3. 移项：把含未知数的项移到一边，常数项移到另一边\n4. 合并同类项：化简方程\n5. 系数化为1：方程两边同除以未知数的系数\n\n【应用】\n列方程解应用题的步骤：\n1. 审题，设未知数\n2. 找等量关系\n3. 列方程\n4. 解方程\n5. 检验并作答",
-      "prerequisites": ["algebraic-expression"],
+      "prerequisites": ["equation-basic", "algebraic-expression"],
       "nextTopics": ["linear-equations-system", "linear-inequality"]
     },
     {
@@ -184,7 +184,7 @@
       "importance": 3,
       "description": "角的概念、分类及直线的位置关系",
       "content": "【角】\n由两条有公共端点的射线组成的图形叫做角。\n\n【角的分类】\n• 锐角：0°<角<90°\n• 直角：角=90°\n• 钝角：90°<角<180°\n• 平角：角=180°\n• 周角：角=360°\n\n【角的关系】\n• 互余：两角之和为90°\n• 互补：两角之和为180°\n• 邻补角：有公共顶点和公共边，另一边互为反向延长线\n• 对顶角：两直线相交，有公共顶点的两个角\n\n【直线位置关系】\n• 相交：有一个公共点\n• 平行：同一平面内不相交\n• 垂直：相交成直角\n\n【平行线性质】\n两直线平行，同位角相等，内错角相等，同旁内角互补。",
-      "prerequisites": [],
+      "prerequisites": ["angle-primary"],
       "nextTopics": ["triangle", "parallel-line"]
     },
     {
@@ -250,7 +250,7 @@
       "importance": 3,
       "description": "形状相同、大小可能不同的三角形",
       "content": "【定义】\n对应角相等，对应边成比例的两个三角形叫做相似三角形。\n\n【相似比】\n对应边的比叫做相似比。\n\n【判定方法】\n1. 平行于三角形一边的直线截其他两边，所得三角形与原三角形相似\n2. 两角对应相等\n3. 两边对应成比例且夹角相等\n4. 三边对应成比例\n\n【性质】\n1. 对应角相等\n2. 对应边成比例\n3. 对应线段（高、中线、角平分线）比等于相似比\n4. 周长比等于相似比\n5. 面积比等于相似比的平方\n\n【应用】\n测量高度、测量距离等实际问题。",
-      "prerequisites": ["congruent-triangles", "parallel-line"],
+      "prerequisites": ["congruent-triangles", "parallel-line", "ratio-proportion"],
       "nextTopics": ["geometric-similarity"]
     },
     {
@@ -261,7 +261,7 @@
       "importance": 2,
       "description": "由四条线段组成的封闭图形",
       "content": "【定义】\n在同一平面内，由不在同一直线上的四条线段首尾顺次相接组成的图形叫做四边形。\n\n【内角和】\n四边形内角和为360°\n\n【分类】\n• 平行四边形：两组对边分别平行\n• 矩形：有一个角是直角的平行四边形\n• 菱形：有一组邻边相等的平行四边形\n• 正方形：既是矩形又是菱形的四边形\n• 梯形：只有一组对边平行的四边形\n\n【平行四边形性质】\n1. 对边平行且相等\n2. 对角相等\n3. 对角线互相平分\n\n【面积公式】\n• 平行四边形：底×高\n• 梯形：(上底+下底)×高÷2",
-      "prerequisites": ["triangle", "parallel-line"],
+      "prerequisites": ["triangle", "parallel-line", "perimeter", "area"],
       "nextTopics": []
     },
     {
@@ -272,7 +272,7 @@
       "importance": 3,
       "description": "到定点距离等于定长的点的轨迹",
       "content": "【定义】\n圆是平面内到定点O的距离等于定长r的所有点组成的图形。\n\n【相关概念】\n• 弦：连接圆上任意两点的线段\n• 直径：经过圆心的弦\n• 弧：圆上任意两点间的部分\n• 圆心角：顶点在圆心的角\n• 圆周角：顶点在圆上，两边都与圆相交的角\n\n【重要定理】\n1. 垂径定理：垂直于弦的直径平分弦及其所对弧\n2. 圆心角定理：圆心角等于它所对弧度数\n3. 圆周角定理：圆周角等于它所对弧度数的一半\n4. 圆内接四边形对角互补\n\n【位置关系】\n点与圆：点在圆内、圆上、圆外\n直线与圆：相交、相切、相离\n圆与圆：内含、内切、相交、外切、相离",
-      "prerequisites": ["triangle"],
+      "prerequisites": ["triangle", "perimeter", "area"],
       "nextTopics": ["circle-equation"]
     },
     {
@@ -305,7 +305,7 @@
       "importance": 3,
       "description": "用坐标表示平面上点的位置",
       "content": "【定义】\n在平面内，两条互相垂直的数轴构成平面直角坐标系。\n水平方向的轴叫x轴（横轴），竖直方向的轴叫y轴（纵轴）。\n\n【点的坐标】\n点P的位置用有序数对(a,b)表示，其中：\na叫做横坐标，b叫做纵坐标。\n\n【象限】\n• 第一象限：x>0, y>0\n• 第二象限：x<0, y>0\n• 第三象限：x<0, y<0\n• 第四象限：x>0, y<0\n\n【距离公式】\n两点A(x₁,y₁), B(x₂,y₂)之间的距离：\nd = √[(x₂-x₁)² + (y₂-y₁)²]\n\n【中点公式】\nAB的中点坐标：\n((x₁+x₂)/2, (y₁+y₂)/2)",
-      "prerequisites": ["real-number"],
+      "prerequisites": ["real-number", "coordinate-primary"],
       "nextTopics": ["line-equation", "plane-vector"]
     },
     {
@@ -316,7 +316,7 @@
       "importance": 2,
       "description": "数据的收集、整理与分析",
       "content": "【数据的收集】\n• 普查：对全体对象进行调查\n• 抽样调查：从总体中抽取样本进行调查\n\n【数据的整理】\n常用的统计图表：\n• 条形统计图：便于比较数据大小\n• 折线统计图：显示数据变化趋势\n• 扇形统计图：显示各部分占比\n• 直方图：显示数据分布\n\n【数据的代表】\n• 平均数：所有数据的和除以数据个数\n• 中位数：将数据从小到大排列，处于中间位置的数\n• 众数：出现次数最多的数据\n\n【选择原则】\n• 平均数：反映总体平均水平\n• 中位数：不受极端值影响\n• 众数：反映集中趋势",
-      "prerequisites": [],
+      "prerequisites": ["statistical-chart"],
       "nextTopics": ["statistics-senior"]
     },
     {
@@ -327,7 +327,7 @@
       "importance": 2,
       "description": "随机事件发生可能性大小的度量",
       "content": "【基本概念】\n• 必然事件：一定会发生的事件\n• 不可能事件：一定不会发生的事件\n• 随机事件：可能发生也可能不发生的事件\n\n【概率定义】\n一般地，如果在一次试验中，有n种可能的结果，并且它们发生的可能性都相等，事件A包含其中的m种结果，那么事件A发生的概率：\nP(A) = m/n\n\n【概率性质】\n0 ≤ P(A) ≤ 1\n• P(A)=0：不可能事件\n• P(A)=1：必然事件\n\n【求概率方法】\n1. 列举法：列举所有可能结果\n2. 列表法：用表格列举\n3. 树状图：用树形图列举\n\n【频率与概率】\n在大量重复试验中，事件发生的频率稳定在某个常数附近，这个常数就是概率。",
-      "prerequisites": [],
+      "prerequisites": ["probability-primary", "fraction"],
       "nextTopics": ["probability-senior"]
     },
     {
@@ -626,6 +626,171 @@
       "content": "【基本概念】\n• 平面：无限延展的二维图形\n• 空间直线：两个平面的交线\n• 异面直线：既不相交也不平行的直线\n\n【位置关系】\n直线与平面：\n• 在平面内\n• 与平面平行\n• 与平面相交（含垂直）\n\n平面与平面：\n• 平行\n• 相交\n\n【判定定理】\n直线与平面平行：平面外直线与平面内直线平行。\n平面与平面平行：一平面内两相交直线与另一平面平行。\n\n【性质定理】\n线面平行⟹线线平行\n面面平行⟹线线平行\n\n【空间向量】\n利用向量方法解决空间问题。",
       "prerequisites": ["plane-vector"],
       "nextTopics": []
+    },
+    {
+      "id": "integer",
+      "name": "整数",
+      "level": "primary",
+      "category": "algebra",
+      "importance": 3,
+      "description": "正整数、零、负整数的统称",
+      "content": "【定义】\n整数包括正整数、零和负整数。\n\n【分类】\n• 正整数：1, 2, 3, ...\n• 零：0\n• 负整数：-1, -2, -3, ...\n\n【性质】\n1. 整数对加、减、乘运算封闭\n2. 整数可分为奇数和偶数\n3. 整数有最大负数和最小正整数\n\n【四则运算】\n加、减、乘、除（除数不为零）",
+      "prerequisites": [],
+      "nextTopics": ["decimal", "fraction", "arithmetic-operation", "equation-basic"]
+    },
+    {
+      "id": "decimal",
+      "name": "小数",
+      "level": "primary",
+      "category": "algebra",
+      "importance": 3,
+      "description": "十进分数的另一种表示形式",
+      "content": "【定义】\n小数是十进分数的另一种表示形式。\n\n【分类】\n• 有限小数：小数位数有限\n• 无限循环小数：小数部分从某位起循环\n• 无限不循环小数：如圆周率π\n\n【性质】\n1. 小数可以化成分数\n2. 小数加减时小数点要对齐\n3. 小数乘法积的小数位数等于因数小数位数之和\n\n【读写】\n从小数点开始，左边是整数部分，右边是小数部分。",
+      "prerequisites": ["integer"],
+      "nextTopics": ["rational-number", "arithmetic-operation"]
+    },
+    {
+      "id": "fraction",
+      "name": "分数",
+      "level": "primary",
+      "category": "algebra",
+      "importance": 3,
+      "description": "把单位'1'平均分成若干份表示这样一份或几份的数",
+      "content": "【定义】\n把单位'1'平均分成若干份，表示这样一份或几份的数叫做分数。\n\n【分类】\n• 真分数：分子小于分母（小于1）\n• 假分数：分子大于或等于分母（大于或等于1）\n• 带分数：由整数和真分数组成\n\n【基本性质】\n分数的分子和分母同时乘或除以相同的数（零除外），分数的大小不变。\n\n【运算】\n• 约分：把分数化成最简分数\n• 通分：把异分母分数化成同分母分数\n• 加减：先通分，再加减\n• 乘：分子乘分子，分母乘分母\n• 除：除以一个分数等于乘以它的倒数",
+      "prerequisites": ["integer"],
+      "nextTopics": ["rational-number", "arithmetic-operation"]
+    },
+    {
+      "id": "arithmetic-operation",
+      "name": "四则运算",
+      "level": "primary",
+      "category": "algebra",
+      "importance": 3,
+      "description": "加、减、乘、除四种运算",
+      "content": "【加法】\n把两个数合并成一个数的运算。\n运算定律：交换律、结合律\n\n【减法】\n已知两个数的和与其中一个加数，求另一个加数的运算。\n\n【乘法】\n求几个相同加数的和的简便运算。\n运算定律：交换律、结合律、分配律\n\n【除法】\n已知两个因数的积与其中一个因数，求另一个因数的运算。\n\n【运算顺序】\n1. 同级运算从左到右\n2. 先乘除后加减\n3. 有括号先算括号内\n\n【验算】\n加法用减法验算，乘法用除法验算。",
+      "prerequisites": ["integer", "decimal", "fraction"],
+      "nextTopics": ["operation-law", "equation-basic", "algebraic-expression"]
+    },
+    {
+      "id": "operation-law",
+      "name": "运算律",
+      "level": "primary",
+      "category": "algebra",
+      "importance": 2,
+      "description": "加法和乘法的运算规律",
+      "content": "【加法运算律】\n• 交换律：a + b = b + a\n• 结合律：(a + b) + c = a + (b + c)\n\n【乘法运算律】\n• 交换律：a × b = b × a\n• 结合律：(a × b) × c = a × (b × c)\n• 分配律：a × (b + c) = a × b + a × c\n\n【应用】\n运用运算律可以使计算更简便。\n\n【举例】\n25 × 4 = 100\n125 × 8 = 1000\n99 × 35 = 35 × 100 - 35 = 3465",
+      "prerequisites": ["arithmetic-operation"],
+      "nextTopics": ["polynomial", "factorization"]
+    },
+    {
+      "id": "equation-basic",
+      "name": "方程初步",
+      "level": "primary",
+      "category": "algebra",
+      "importance": 2,
+      "description": "含有未知数的等式",
+      "content": "【定义】\n含有未知数的等式叫做方程。\n\n【方程的解】\n使方程两边相等的未知数的值叫做方程的解。\n\n【解方程】\n求方程的解的过程叫做解方程。\n\n【等式的性质】\n1. 等式两边同时加上或减去同一个数，等式仍然成立\n2. 等式两边同时乘或除以同一个数（零除外），等式仍然成立\n\n【列方程解决问题】\n1. 找出未知数，用x表示\n2. 找出等量关系\n3. 列出方程\n4. 解方程\n5. 检验并作答\n\n【示例】\nx + 5 = 10\nx = 10 - 5\nx = 5",
+      "prerequisites": ["integer", "arithmetic-operation"],
+      "nextTopics": ["linear-equation", "quadratic-equation"]
+    },
+    {
+      "id": "integer-multiplication",
+      "name": "整数乘法",
+      "level": "primary",
+      "category": "algebra",
+      "importance": 2,
+      "description": "整数乘法的计算方法",
+      "content": "【一位数乘一位数】\n熟记乘法口诀\n\n【多位数乘一位数】\n竖式计算：從低位到高位依次乘起\n\n【两位数乘两位数】\n竖式计算：分别用第二个因数的每一位去乘第一个因数\n\n【三位数乘两位数】\n同样的方法，注意进位\n\n【积的变化规律】\n一个因数不变，另一个因数扩大（或缩小）若干倍，积也扩大（或缩小）相同的倍数。\n\n【估算】\n把数看成整十、整百进行估算。",
+      "prerequisites": ["arithmetic-operation"],
+      "nextTopics": ["factorization"]
+    },
+    {
+      "id": "perimeter",
+      "name": "周长",
+      "level": "primary",
+      "category": "geometry",
+      "importance": 2,
+      "description": "封闭图形边界的长度",
+      "content": "【定义】\n围成封闭图形一周的长度叫做周长。\n\n【长方形周长】\nC = 2 × (长 + 宽)\n\n【正方形周长】\nC = 4 × 边长\n\n【圆的周长】\nC = πd = 2πr\n（π≈3.14）\n\n【周长公式的应用】\n已知周长求边长或长宽。",
+      "prerequisites": ["angle-line"],
+      "nextTopics": ["quadrilateral", "circle"]
+    },
+    {
+      "id": "area",
+      "name": "面积",
+      "level": "primary",
+      "category": "geometry",
+      "importance": 3,
+      "description": "物体表面或封闭图形的大小",
+      "content": "【定义】\n物体表面或封闭图形的大小叫做面积。\n\n【面积单位】\n平方米（m²）、平方分米（dm²）、平方厘米（cm²）\n1m² = 100dm² = 10000cm²\n\n【长方形面积】\nS = 长 × 宽\n\n【正方形面积】\nS = 边长 × 边长\n\n【平行四边形面积】\nS = 底 × 高\n\n【三角形面积】\nS = 底 × 高 ÷ 2\n\n【梯形面积】\nS = (上底 + 下底) × 高 ÷ 2\n\n【圆的面积】\nS = πr²",
+      "prerequisites": ["perimeter"],
+      "nextTopics": ["triangle", "quadrilateral", "circle"]
+    },
+    {
+      "id": "volume",
+      "name": "体积",
+      "level": "primary",
+      "category": "geometry",
+      "importance": 2,
+      "description": "物体所占空间的大小",
+      "content": "【定义】\n物体所占空间的大小叫做体积。\n\n【体积单位】\n立方米（m³）、立方分米（dm³）、立方厘米（cm³）\n1m³ = 1000dm³ = 1000000cm³\n\n【长方体体积】\nV = 长 × 宽 × 高\n\n【正方体体积】\nV = 棱长³\n\n【圆柱体积】\nV = 底面积 × 高 = πr²h\n\n【圆锥体积】\nV = 1/3 × 底面积 × 高 = 1/3πr²h",
+      "prerequisites": ["area"],
+      "nextTopics": ["solid-geometry"]
+    },
+    {
+      "id": "angle-primary",
+      "name": "角",
+      "level": "primary",
+      "category": "geometry",
+      "importance": 2,
+      "description": "从一点引出的两条射线所组成的图形",
+      "content": "【定义】\n从一点引出的两条射线所组成的图形叫做角。\n这个点叫做角的顶点，两条射线叫做角的边。\n\n【角的表示】\n∠AOB 或 ∠O 或 ∠1\n\n【角的度量】\n1周角 = 360°\n1平角 = 180°\n1直角 = 90°\n1° = 60′\n1′ = 60″\n\n【角的分类】\n• 锐角：小于90°\n• 直角：等于90°\n• 钝角：大于90°小于180°\n• 平角：等于180°\n\n【用量角器画角】\n先画一条射线，用量角器对准顶点确定度数，画出另一条射线。",
+      "prerequisites": [],
+      "nextTopics": ["angle-line", "triangle", "perimeter"]
+    },
+    {
+      "id": "coordinate-primary",
+      "name": "位置与方向",
+      "level": "primary",
+      "category": "geometry",
+      "importance": 2,
+      "description": "用方向和距离确定物体的位置",
+      "content": "【方向】\n东、西、南、北、东北、东南、西北、西南\n\n【描述位置】\n• 方向：东偏南、西偏北等\n• 距离：用米、千米等表示\n\n【数对】\n用两个数表示位置，如(3,2)表示第3列第2行。\n\n【路线图】\n描述从一处到另一处的路线和方向。\n\n【应用】\n描述建筑物的位置、确定地图上的地点等。",
+      "prerequisites": [],
+      "nextTopics": ["coordinate-geometry"]
+    },
+    {
+      "id": "statistical-chart",
+      "name": "统计图表",
+      "level": "primary",
+      "category": "statistics",
+      "importance": 2,
+      "description": "数据的收集、整理与展示",
+      "content": "【统计表】\n把数据按照一定的标准进行分类、汇总的表格。\n\n【条形统计图】\n用直条的长短表示数量的多少。\n特点：便于直观比较数据大小。\n\n【折线统计图】\n用折线的起伏表示数量的变化趋势。\n特点：便于直观看出数量的增减变化。\n\n【扇形统计图】\n用扇形面积表示各部分数量占总数的百分比。\n特点：便于直观看出各部分与整体的关系。\n\n【平均数】\n一组数据的和除以数据的个数。",
+      "prerequisites": [],
+      "nextTopics": ["statistics-junior"]
+    },
+    {
+      "id": "probability-primary",
+      "name": "可能性",
+      "level": "primary",
+      "category": "statistics",
+      "importance": 2,
+      "description": "事件发生的可能性大小",
+      "content": "【确定性事件】\n• 必然事件：一定发生\n• 不可能事件：一定不发生\n\n【不确定性事件】\n可能发生也可能不发生，用\"可能\"描述。\n\n【可能性大小】\n用分数表示可能性的大小：\n可能性 = 发生的情况数 / 所有可能的情况数\n\n【游戏公平性】\n设计游戏规则使双方获胜的可能性相等。\n\n【举例】\n• 抛硬币：正面朝上的可能性是1/2\n• 掷骰子：掷出6的可能性是1/6",
+      "prerequisites": ["fraction"],
+      "nextTopics": ["probability-junior"]
+    },
+    {
+      "id": "ratio-proportion",
+      "name": "比和比例",
+      "level": "primary",
+      "category": "algebra",
+      "importance": 2,
+      "description": "两个数相除又叫做两个数的比",
+      "content": "【比】\n两个数相除又叫做两个数的比。\na:b = a/b\n\n【比的基本性质】\n比的前项和后项同时乘或除以相同的数（零除外），比值不变。\n\n【化简比】\n把比化成最简的整数比。\n\n【比例】\n表示两个比相等的式子叫做比例。\na:b = c:d\n\n【比例的基本性质】\n在比例中，两个外项的积等于两个内项的积。\nad = bc\n\n【正比例】\ny/x = k（一定）\n\n【反比例】\nxy = k（一定）\n\n【应用】\n按比例分配、解比例等。",
+      "prerequisites": ["fraction", "arithmetic-operation"],
+      "nextTopics": ["similar-triangles"]
     }
   ],
   "links": [
@@ -685,6 +850,26 @@
     {"source": "derivative-application", "target": "integral"},
     {"source": "counting-principle", "target": "binomial-theorem"},
     {"source": "real-number", "target": "complex-number"},
-    {"source": "plane-vector", "target": "solid-geometry"}
+    {"source": "plane-vector", "target": "solid-geometry"},
+    {"source": "integer", "target": "rational-number"},
+    {"source": "decimal", "target": "rational-number"},
+    {"source": "fraction", "target": "rational-number"},
+    {"source": "arithmetic-operation", "target": "algebraic-expression"},
+    {"source": "operation-law", "target": "polynomial"},
+    {"source": "operation-law", "target": "factorization"},
+    {"source": "equation-basic", "target": "linear-equation"},
+    {"source": "equation-basic", "target": "quadratic-equation"},
+    {"source": "integer-multiplication", "target": "factorization"},
+    {"source": "perimeter", "target": "quadrilateral"},
+    {"source": "perimeter", "target": "circle"},
+    {"source": "area", "target": "triangle"},
+    {"source": "area", "target": "quadrilateral"},
+    {"source": "area", "target": "circle"},
+    {"source": "volume", "target": "solid-geometry"},
+    {"source": "angle-primary", "target": "angle-line"},
+    {"source": "coordinate-primary", "target": "coordinate-geometry"},
+    {"source": "statistical-chart", "target": "statistics-junior"},
+    {"source": "probability-primary", "target": "probability-junior"},
+    {"source": "ratio-proportion", "target": "similar-triangles"}
   ]
 }
