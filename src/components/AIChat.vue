@@ -1,6 +1,6 @@
 <script setup>
 import { ref, nextTick, watch } from 'vue'
-import { callAI, buildContextPrompt } from '../services/ai'
+import { streamAI, buildContextPrompt } from '../services/ai'
 
 const props = defineProps({
   node: Object,
@@ -16,6 +16,7 @@ const messages = ref([])
 const input = ref('')
 const isLoading = ref(false)
 const messagesContainer = ref(null)
+const streamingContent = ref('')
 
 const modeLabels = {
   knowledge: '知识点问答',
@@ -37,6 +38,10 @@ const scrollToBottom = () => {
   })
 }
 
+const formatContent = (content) => {
+  return content.replace(/\n/g, '<br>')
+}
+
 const sendMessage = async () => {
   const userInput = input.value.trim()
   if (!userInput || isLoading.value) return
@@ -44,17 +49,25 @@ const sendMessage = async () => {
   messages.value.push({ role: 'user', content: userInput })
   input.value = ''
   isLoading.value = true
+  streamingContent.value = ''
   scrollToBottom()
 
   try {
     const context = buildContextPrompt(props.node)
-    const response = await callAI(
-      messages.value,
-      props.mode,
-      context
-    )
+    
+    messages.value.push({ role: 'assistant', content: '' })
+    const lastIndex = messages.value.length - 1
 
-    messages.value.push({ role: 'assistant', content: response })
+    await streamAI(
+      messages.value.slice(0, -1),
+      props.mode,
+      context,
+      (chunk) => {
+        streamingContent.value += chunk
+        messages.value[lastIndex].content = streamingContent.value
+        scrollToBottom()
+      }
+    )
   } catch (error) {
     messages.value.push({
       role: 'assistant',
@@ -106,15 +119,9 @@ watch(() => props.node, () => {
         <div class="message-avatar">
           {{ msg.role === 'user' ? '👤' : '🤖' }}
         </div>
-        <div class="message-content" v-html="msg.content.replace(/\n/g, '<br>')"></div>
-      </div>
-
-      <div v-if="isLoading" class="message assistant">
-        <div class="message-avatar">🤖</div>
-        <div class="message-content loading">
-          <span class="dot">.</span>
-          <span class="dot">.</span>
-          <span class="dot">.</span>
+        <div class="message-content">
+          <span v-html="formatContent(msg.content)"></span>
+          <span v-if="isLoading && index === messages.length - 1" class="cursor">▌</span>
         </div>
       </div>
     </div>
@@ -127,7 +134,8 @@ watch(() => props.node, () => {
         :disabled="isLoading"
       />
       <button @click="sendMessage" :disabled="isLoading || !input.trim()">
-        {{ isLoading ? '...' : '发送' }}
+        <span v-if="isLoading" class="btn-loading">发送中</span>
+        <span v-else>发送</span>
       </button>
     </div>
   </div>
@@ -272,6 +280,11 @@ watch(() => props.node, () => {
 @keyframes blink {
   0%, 60%, 100% { opacity: 0; }
   30% { opacity: 1; }
+}
+
+.cursor {
+  animation: blink 1s infinite;
+  color: #667eea;
 }
 
 .chat-input {
